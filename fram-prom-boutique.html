@@ -1,0 +1,1175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Fram Prom Boutique · Framingham Earl High School</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg:       #F8F5F0;
+      --card:     #EFE9E2;
+      --primary:  #7D8F77;
+      --secondary:#5F6B4F;
+      --accent:   #B8A79A;
+      --text:     #3E3E3A;
+      --white:    #FFFFFF;
+      --mid:      #8A8A84;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'DM Sans', sans-serif;
+      font-weight: 300;
+      color: var(--text);
+      background: var(--bg);
+      font-size: 16px;
+      line-height: 1.7;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 1.2rem 6vw;
+      background: rgba(248,245,240,0.94);
+      backdrop-filter: blur(8px);
+      border-bottom: 1px solid rgba(125,143,119,0.18);
+    }
+    .nav-logo {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.35rem;
+      font-weight: 600;
+      letter-spacing: 0.04em;
+      color: var(--secondary);
+      text-decoration: none;
+    }
+    .nav-links { display: flex; gap: 2.2rem; list-style: none; }
+    .nav-links a {
+      font-size: 0.82rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      text-decoration: none;
+      color: var(--mid);
+      transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--primary); }
+
+    /* ── HERO ── */
+    #hero {
+      min-height: 100vh;
+      display: grid;
+      place-items: center;
+      padding: 8rem 6vw 5rem;
+      text-align: center;
+      background: linear-gradient(160deg, var(--card) 0%, var(--bg) 65%);
+      position: relative;
+      overflow: hidden;
+    }
+
+    /* SVG leaf watermark behind hero text */
+    #hero-leaf {
+      position: absolute;
+      top: 50%; left: 50%;
+      transform: translate(-50%, -50%);
+      width: clamp(280px, 55vw, 600px);
+      opacity: 0.055;
+      pointer-events: none;
+      user-select: none;
+    }
+
+    .hero-eyebrow {
+      font-size: 0.75rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--primary);
+      margin-bottom: 1.4rem;
+    }
+    .hero-headline {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(2.8rem, 7.5vw, 6rem);
+      font-weight: 300;
+      line-height: 1.05;
+      color: var(--text);
+      margin-bottom: 1.6rem;
+    }
+    .hero-headline em { font-style: italic; color: var(--primary); }
+    .hero-sub {
+      max-width: 480px;
+      margin: 0 auto 2.8rem;
+      color: var(--mid);
+      font-size: 1.05rem;
+    }
+
+    /* ── COUNTDOWN ── */
+    #countdown {
+      background: var(--secondary);
+      padding: 3rem 6vw;
+      text-align: center;
+    }
+    .countdown-label {
+      font-size: 0.72rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.6);
+      margin-bottom: 1.4rem;
+    }
+    .countdown-grid {
+      display: flex;
+      justify-content: center;
+      gap: 2rem;
+      flex-wrap: wrap;
+    }
+    .countdown-unit { text-align: center; }
+    .countdown-num {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(2.5rem, 6vw, 4.5rem);
+      font-weight: 300;
+      color: white;
+      line-height: 1;
+      display: block;
+    }
+    .countdown-unit-label {
+      font-size: 0.68rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.55);
+      margin-top: 0.4rem;
+      display: block;
+    }
+
+    /* ── BUTTONS ── */
+    .btn {
+      display: inline-block;
+      padding: 0.85rem 2.2rem;
+      border: 1.5px solid var(--primary);
+      color: var(--primary);
+      text-decoration: none;
+      font-size: 0.8rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      transition: background 0.25s, color 0.25s;
+      background: transparent;
+      cursor: pointer;
+      font-family: inherit;
+    }
+    .btn:hover { background: var(--primary); color: white; }
+    .btn-solid { background: var(--primary); color: white; border-color: var(--primary); }
+    .btn-solid:hover { background: var(--secondary); border-color: var(--secondary); }
+
+    /* ── SECTIONS ── */
+    section { padding: 6rem 6vw; }
+    .section-label {
+      font-size: 0.72rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--primary);
+      margin-bottom: 0.8rem;
+    }
+    .section-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(2rem, 4vw, 3.2rem);
+      font-weight: 300;
+      line-height: 1.15;
+      color: var(--text);
+      margin-bottom: 1.6rem;
+    }
+    .section-body {
+      color: var(--mid);
+      max-width: 560px;
+      font-size: 1rem;
+    }
+    .divider {
+      width: 48px; height: 1px;
+      background: var(--primary);
+      margin: 2rem 0;
+    }
+
+    /* ── ABOUT ── */
+    #about {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+      align-items: center;
+      background: var(--white);
+    }
+    .about-visual {
+      aspect-ratio: 3/4;
+      background: var(--card);
+      display: grid;
+      place-items: center;
+      overflow: hidden;
+    }
+    .about-visual svg { width: 60%; opacity: 0.35; }
+
+    /* ── AIM ── */
+    #aim { background: var(--secondary); color: white; }
+    #aim .section-label { color: rgba(255,255,255,0.6); }
+    #aim .section-title { color: white; }
+    #aim .section-body { color: rgba(255,255,255,0.65); max-width: 100%; }
+    .aim-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 2.4rem;
+      margin-top: 3.5rem;
+    }
+    .aim-card {
+      padding: 2rem 1.8rem;
+      border: 1px solid rgba(255,255,255,0.15);
+      background: rgba(255,255,255,0.05);
+    }
+    .aim-card-icon { font-size: 1.8rem; margin-bottom: 1rem; }
+    .aim-card h3 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.35rem;
+      font-weight: 400;
+      color: white;
+      margin-bottom: 0.6rem;
+    }
+    .aim-card p { font-size: 0.9rem; color: rgba(255,255,255,0.55); line-height: 1.65; }
+
+    /* ── DONATE ── */
+    #donate {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+      align-items: start;
+      background: var(--card);
+    }
+    .donate-steps { list-style: none; margin-top: 1.5rem; }
+    .donate-steps li {
+      display: flex;
+      gap: 1.2rem;
+      padding: 1.4rem 0;
+      border-bottom: 1px solid rgba(125,143,119,0.2);
+    }
+    .donate-steps li:first-child { border-top: 1px solid rgba(125,143,119,0.2); }
+    .step-num {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.5rem;
+      font-style: italic;
+      color: var(--primary);
+      flex-shrink: 0;
+      width: 2rem;
+      text-align: right;
+    }
+    .step-body h4 { font-size: 0.95rem; font-weight: 500; margin-bottom: 0.2rem; color: var(--text); }
+    .step-body p { font-size: 0.88rem; color: var(--mid); }
+    .donate-accept { background: var(--white); padding: 2rem; }
+    .donate-accept h4 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.2rem;
+      margin-bottom: 1rem;
+      color: var(--text);
+    }
+    .tags { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+    .tag {
+      font-size: 0.78rem;
+      letter-spacing: 0.08em;
+      padding: 0.35rem 0.8rem;
+      background: var(--card);
+      color: var(--mid);
+      text-transform: uppercase;
+    }
+
+    /* ── TRACKER ── */
+    #tracker { background: var(--bg); text-align: center; }
+    .tracker-stat { display: flex; flex-direction: column; align-items: center; gap: 0.4rem; }
+    .tracker-num {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(3rem, 7vw, 5rem);
+      font-weight: 300;
+      color: var(--primary);
+      line-height: 1;
+    }
+    .tracker-label {
+      font-size: 0.75rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--mid);
+    }
+    .admin-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      padding: 0.6rem 0;
+      border-bottom: 1px solid var(--card);
+    }
+    .admin-row label { font-size: 0.85rem; color: var(--mid); }
+    .admin-row input {
+      width: 80px;
+      padding: 0.4rem 0.6rem;
+      border: 1px solid var(--card);
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.9rem;
+      color: var(--text);
+      text-align: center;
+      background: var(--bg);
+    }
+    .admin-row input:focus { outline: 1px solid var(--primary); }
+
+    /* ── FAQs ── */
+    #faq { background: var(--white); }
+    .faq-list { max-width: 720px; margin-top: 2.5rem; }
+    .faq-item { border-bottom: 1px solid var(--card); }
+    .faq-question {
+      width: 100%;
+      background: none;
+      border: none;
+      text-align: left;
+      padding: 1.3rem 0;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.97rem;
+      font-weight: 500;
+      color: var(--text);
+      cursor: pointer;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 1rem;
+    }
+    .faq-question:hover { color: var(--primary); }
+    .faq-icon {
+      font-size: 1.2rem;
+      color: var(--primary);
+      flex-shrink: 0;
+      transition: transform 0.25s;
+      line-height: 1;
+    }
+    .faq-answer {
+      display: none;
+      padding: 0 0 1.3rem;
+      font-size: 0.92rem;
+      color: var(--mid);
+      line-height: 1.7;
+      max-width: 620px;
+    }
+    .faq-item.open .faq-answer { display: block; }
+    .faq-item.open .faq-icon { transform: rotate(45deg); }
+
+    /* ── CONTACT ── */
+    #contact { background: var(--card); }
+    #contact .section-body { margin-bottom: 2.5rem; }
+    .contact-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+      align-items: start;
+    }
+    .contact-info-block { margin-top: 2rem; }
+    .contact-item { margin-bottom: 1.5rem; }
+    .contact-item span {
+      display: block;
+      font-size: 0.7rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--primary);
+      margin-bottom: 0.3rem;
+    }
+    .contact-item a { color: var(--text); text-decoration: none; }
+    .contact-item a:hover { color: var(--primary); }
+
+    /* Contact form */
+    .contact-form { display: flex; flex-direction: column; gap: 1rem; }
+    .form-group { display: flex; flex-direction: column; gap: 0.4rem; }
+    .form-group label {
+      font-size: 0.75rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--mid);
+    }
+    .form-group input,
+    .form-group textarea,
+    .form-group select {
+      padding: 0.75rem 1rem;
+      border: 1px solid rgba(125,143,119,0.3);
+      background: var(--white);
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.92rem;
+      color: var(--text);
+      resize: vertical;
+    }
+    .form-group input:focus,
+    .form-group textarea:focus,
+    .form-group select:focus {
+      outline: 1.5px solid var(--primary);
+      border-color: var(--primary);
+    }
+    .form-group textarea { min-height: 120px; }
+    #form-success {
+      display: none;
+      padding: 1rem 1.4rem;
+      background: rgba(125,143,119,0.12);
+      border-left: 3px solid var(--primary);
+      font-size: 0.92rem;
+      color: var(--secondary);
+      margin-top: 0.5rem;
+    }
+
+
+    /* ── GALLERY ── */
+    .year-tab {
+      background: rgba(255,255,255,0.1);
+      border: 1px solid rgba(255,255,255,0.25);
+      color: rgba(255,255,255,0.7);
+      padding: 0.5rem 1.4rem;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.8rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: background 0.2s, color 0.2s;
+    }
+    .year-tab:hover, .year-tab.active {
+      background: rgba(255,255,255,0.2);
+      color: white;
+      border-color: rgba(255,255,255,0.5);
+    }
+    .carousel {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+    .car-track-wrap {
+      overflow: hidden;
+      flex: 1;
+      border-radius: 0;
+    }
+    .car-track {
+      display: flex;
+      transition: transform 0.4s ease;
+    }
+    .car-slide {
+      min-width: 100%;
+    }
+    .photo-placeholder {
+      aspect-ratio: 16/9;
+      background: rgba(255,255,255,0.07);
+      border: 2px dashed rgba(255,255,255,0.2);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 0.8rem;
+      color: rgba(255,255,255,0.4);
+    }
+    .photo-placeholder span { font-size: 2.5rem; }
+    .photo-placeholder p { font-size: 0.85rem; letter-spacing: 0.08em; }
+    .car-slide img {
+      width: 100%;
+      aspect-ratio: 16/9;
+      object-fit: cover;
+      display: block;
+    }
+    .car-btn {
+      background: rgba(255,255,255,0.12);
+      border: 1px solid rgba(255,255,255,0.25);
+      color: white;
+      width: 44px;
+      height: 44px;
+      font-size: 1.1rem;
+      cursor: pointer;
+      flex-shrink: 0;
+      transition: background 0.2s;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .car-btn:hover { background: rgba(255,255,255,0.22); }
+    .car-caption {
+      margin-top: 1rem;
+      font-size: 0.78rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.4);
+      text-align: center;
+    }
+    /* ── FOOTER ── */
+    footer {
+      padding: 2rem 6vw;
+      border-top: 1px solid rgba(125,143,119,0.18);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 0.78rem;
+      color: var(--mid);
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      background: var(--bg);
+    }
+    footer .foot-logo {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1rem;
+      color: var(--secondary);
+    }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 760px) {
+      #about, #donate, .contact-grid { grid-template-columns: 1fr; }
+      .about-visual { aspect-ratio: 4/3; }
+      nav { padding: 1rem 5vw; }
+      .nav-links { gap: 1.2rem; }
+    }
+    @media (max-width: 480px) { .nav-links { display: none; } }
+    @media (prefers-reduced-motion: reduce) { * { transition: none !important; } }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <a class="nav-logo" href="#hero">
+      <img src="Fram_Prom_Boutique.svg" alt="Fram Prom Boutique" style="height:48px; width:auto; display:block;" />
+    </a>
+    <ul class="nav-links">
+      <li><a href="#about">About</a></li>
+      <li><a href="#aim">Our Aim</a></li>
+      <li><a href="#donate">Donate</a></li>
+      <li><a href="#tracker">Impact</a></li>
+      <li><a href="#gallery">Gallery</a></li>
+      <li><a href="#faq">FAQs</a></li>
+      <li><a href="#charity">Partners</a></li>
+      <li><a href="#team">Team</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </nav>
+
+  <!-- HERO -->
+  <section id="hero">
+    <!-- Flowing leaf watermark -->
+    <svg id="hero-leaf" viewBox="0 0 400 500" xmlns="http://www.w3.org/2000/svg" fill="none">
+      <path d="M200 480 C200 480 60 380 40 260 C20 140 100 40 200 20 C300 40 380 140 360 260 C340 380 200 480 200 480Z"
+            fill="#5F6B4F" stroke="none"/>
+      <path d="M200 480 C200 480 200 20 200 20" stroke="#F8F5F0" stroke-width="2.5" stroke-linecap="round"/>
+      <path d="M200 120 C200 120 150 150 130 200" stroke="#F8F5F0" stroke-width="1.5" stroke-linecap="round" opacity="0.7"/>
+      <path d="M200 180 C200 180 240 210 260 260" stroke="#F8F5F0" stroke-width="1.5" stroke-linecap="round" opacity="0.7"/>
+      <path d="M200 240 C200 240 155 268 140 310" stroke="#F8F5F0" stroke-width="1.5" stroke-linecap="round" opacity="0.7"/>
+      <path d="M200 300 C200 300 248 325 265 370" stroke="#F8F5F0" stroke-width="1.5" stroke-linecap="round" opacity="0.7"/>
+      <path d="M200 360 C200 360 168 378 158 410" stroke="#F8F5F0" stroke-width="1.5" stroke-linecap="round" opacity="0.6"/>
+    </svg>
+
+    <div style="position:relative; z-index:1;">
+      <div style="margin-bottom:1.8rem;">
+        <img src="Fram_Prom_Boutique.svg" alt="Fram Prom Boutique" style="height:140px; width:auto; margin:0 auto 1rem; display:block;" />
+        <p class="hero-eyebrow">Framingham Earl High School · Est. 2025</p>
+      </div>
+      <h1 class="hero-headline">Every student deserves<br>a <em>perfect</em> prom night.</h1>
+      <p style="font-family: var(--font-voice, 'Cormorant Garamond', serif); font-size:1.4rem; font-style:italic; color:var(--primary); letter-spacing:0.08em; margin-bottom:0.8rem;">Wear. Share. Care.</p>
+      <p class="hero-sub">Fram Prom Boutique offers donated formalwear brought in by the school community — choose something you love, and give what you can.</p>
+      <a href="#about" class="btn">Learn more</a>
+    </div>
+  </section>
+
+  <!-- COUNTDOWN -->
+  <section id="countdown">
+    <p class="countdown-label">Prom 2027 · Countdown</p>
+    <div class="countdown-grid">
+      <div class="countdown-unit"><span class="countdown-num" id="cd-days">—</span><span class="countdown-unit-label">Days</span></div>
+      <div class="countdown-unit"><span class="countdown-num" id="cd-hours">—</span><span class="countdown-unit-label">Hours</span></div>
+      <div class="countdown-unit"><span class="countdown-num" id="cd-mins">—</span><span class="countdown-unit-label">Minutes</span></div>
+      <div class="countdown-unit"><span class="countdown-num" id="cd-secs">—</span><span class="countdown-unit-label">Seconds</span></div>
+    </div>
+  </section>
+
+  <!-- ABOUT -->
+  <section id="about">
+    <div class="about-visual">
+      <svg viewBox="0 0 200 280" xmlns="http://www.w3.org/2000/svg" fill="none">
+        <path d="M100 270 C100 270 20 200 15 130 C10 60 55 10 100 5 C145 10 190 60 185 130 C180 200 100 270 100 270Z"
+              fill="#5F6B4F"/>
+        <path d="M100 270 C100 270 100 5 100 5" stroke="#EFE9E2" stroke-width="1.5" stroke-linecap="round"/>
+        <path d="M100 70 C100 70 72 88 62 115" stroke="#EFE9E2" stroke-width="1.2" stroke-linecap="round" opacity="0.8"/>
+        <path d="M100 110 C100 110 128 128 140 155" stroke="#EFE9E2" stroke-width="1.2" stroke-linecap="round" opacity="0.8"/>
+        <path d="M100 150 C100 150 74 165 66 192" stroke="#EFE9E2" stroke-width="1.2" stroke-linecap="round" opacity="0.8"/>
+        <path d="M100 190 C100 190 127 204 136 228" stroke="#EFE9E2" stroke-width="1.2" stroke-linecap="round" opacity="0.7"/>
+      </svg>
+    </div>
+    <div>
+      <p class="section-label">About us</p>
+      <h2 class="section-title">A boutique built on generosity</h2>
+      <div class="divider"></div>
+      <p class="section-body">
+        Fram Prom Boutique is a sustainability-led initiative at Framingham Earl High School. We collect gently used formalwear donated by the school community, giving clothes a second life and keeping them out of landfill.
+      </p>
+      <br />
+      <p class="section-body">
+        Whether it's a stunning dress, a sharp suit, or the finishing accessories, every item in our boutique has been given with care and love by someone in our community. Items are available in exchange for a voluntary donation — whatever you can give is gratefully received.
+      </p>
+    </div>
+  </section>
+
+  <!-- AIM -->
+  <section id="aim">
+    <div style="max-width:560px;">
+      <p class="section-label">Our aim</p>
+      <h2 class="section-title">Making prom accessible for everyone</h2>
+      <div class="divider" style="background: rgba(255,255,255,0.3);"></div>
+      <p class="section-body">
+        We set out to make prom more sustainable and more inclusive — reducing textile waste while supporting students across our community to access formalwear they'd otherwise struggle to afford. Each year group that donates leaves a lasting legacy for the students who come after them.
+      </p>
+      <br/>
+      <p class="section-body" style="color:rgba(255,255,255,0.5); font-size:0.88rem;">
+        In our first year we are aiming to collect 50+ prom outfits, save dozens of garments from waste, help make prom more affordable for local families, and support a chosen charity.
+      </p>
+    </div>
+    <div class="aim-grid">
+      <div class="aim-card">
+        <div class="aim-card-icon">👗</div>
+        <h3>Affordable formalwear</h3>
+        <p>Items are available in exchange for a voluntary monetary donation — give what you can, take something you'll love.</p>
+      </div>
+      <div class="aim-card">
+        <div class="aim-card-icon">♻️</div>
+        <h3>Reduce waste</h3>
+        <p>Formalwear is often worn once. By donating, families give outfits a second life and reduce textile waste.</p>
+      </div>
+      <div class="aim-card">
+        <div class="aim-card-icon">🤝</div>
+        <h3>Support our community</h3>
+        <p>This boutique exists to support students and families in our community. Every donation helps someone feel confident and included on a big night.</p>
+      </div>
+      <div class="aim-card">
+        <div class="aim-card-icon">🌱</div>
+        <h3>Leave a legacy</h3>
+        <p>Each year group that donates leaves something behind for the students who come after them — a tradition of generosity that grows with every prom.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- DONATE -->
+  <section id="donate">
+    <div>
+      <p class="section-label">How to donate</p>
+      <h2 class="section-title">Pass it forward in four simple steps</h2>
+      <div class="divider"></div>
+      <p class="section-body">Donating takes minutes. All we ask is that items are clean and in good condition.</p>
+
+      <ul class="donate-steps">
+        <li>
+          <span class="step-num">1</span>
+          <div class="step-body">
+            <h4>Gather your items</h4>
+            <p>Dresses, suits, shirts, ties, shoes, jewellery, bags — anything prom-related is welcome.</p>
+          </div>
+        </li>
+        <li>
+          <span class="step-num">2</span>
+          <div class="step-body">
+            <h4>Make sure they're clean</h4>
+            <p>Wash or dry-clean items before donating so they're ready to wear straight away.</p>
+          </div>
+        </li>
+        <li>
+          <span class="step-num">3</span>
+          <div class="step-body">
+            <h4>Bring it into school</h4>
+            <p>Drop items off at school reception or with a designated member of staff. No need to arrange anything in advance.</p>
+          </div>
+        </li>
+        <li>
+          <span class="step-num">4</span>
+          <div class="step-body">
+            <h4>Complete your donation tag</h4>
+            <p>You will be asked to fill in a small tag to attach to your item. This includes details such as the size, brand, age of the item, and any signs of wear or damage. You can add your name if you'd like to, but this is optional. A copy of the tag is shown below — you're welcome to print and complete one before you arrive.</p>
+            <div style="margin-top:1rem; border: 1.5px dashed var(--accent); padding: 1.2rem; background: var(--white); max-width: 340px;">
+              <p style="font-size:0.7rem; letter-spacing:0.15em; text-transform:uppercase; color:var(--primary); margin-bottom:0.8rem;">Donation Tag · Fram Prom Boutique</p>
+              <div style="display:grid; grid-template-columns:1fr 1fr; gap:0.5rem 1rem; font-size:0.8rem; color:var(--mid);">
+                <div><span style="display:block; font-weight:500; color:var(--text);">Item type</span>_______________</div>
+                <div><span style="display:block; font-weight:500; color:var(--text);">Size</span>_______________</div>
+                <div><span style="display:block; font-weight:500; color:var(--text);">Brand</span>_______________</div>
+                <div><span style="display:block; font-weight:500; color:var(--text);">Approx. age</span>_______________</div>
+                <div style="grid-column:1/-1;"><span style="display:block; font-weight:500; color:var(--text);">Condition / notes</span>_______________</div>
+                <div style="grid-column:1/-1;"><span style="display:block; font-weight:500; color:var(--text);">Your name (optional)</span>_______________</div>
+              </div>
+              <p style="font-size:0.7rem; color:var(--accent); margin-top:0.8rem; text-align:center;">Thank you for your donation ♡</p>
+            </div>
+          </div>
+        </li>
+        <li>
+          <span class="step-num">5</span>
+          <div class="step-body">
+            <h4>We do the rest</h4>
+            <p>Items are sorted, steamed if needed, and added to the boutique ready for students to choose from in person.</p>
+          </div>
+        </li>
+      </ul>
+    </div>
+
+    <div>
+      <div class="donate-accept">
+        <h4>We accept</h4>
+        <div class="tags">
+          <span class="tag">Dresses</span>
+          <span class="tag">Suits</span>
+          <span class="tag">Blazers</span>
+          <span class="tag">Shirts</span>
+          <span class="tag">Ties &amp; bow ties</span>
+          <span class="tag">Shoes</span>
+          <span class="tag">Bags &amp; clutches</span>
+          <span class="tag">Jewellery</span>
+          <span class="tag">Cufflinks</span>
+          <span class="tag">Corsages</span>
+          <span class="tag">Accessories</span>
+        </div>
+      </div>
+
+      <div style="margin-top: 2rem; padding: 2rem; background: var(--white); border-left: 3px solid var(--primary);">
+        <p class="section-label" style="margin-bottom:0.5rem;">Drop-off point</p>
+        <p style="font-size:0.95rem; color:var(--mid);">
+          School Reception<br>
+          Framingham Earl High School<br>
+          Monday – Friday, 8am – 4pm
+        </p>
+      </div>
+
+      <div style="margin-top: 1.5rem; text-align: center;">
+        <a href="#contact" class="btn">Get in touch before donating</a>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- GALLERY -->
+  <section id="gallery" style="background: var(--secondary); padding: 6rem 6vw;">
+    <p class="section-label" style="color:rgba(255,255,255,0.6);">Prom memories</p>
+    <h2 class="section-title" style="color:white;">Past proms</h2>
+    <div class="divider" style="background:rgba(255,255,255,0.3);"></div>
+
+    <div style="display:flex; gap:1rem; margin-bottom:2.5rem; flex-wrap:wrap;">
+      <button class="year-tab active" onclick="showYear('2026')">2026</button>
+      <button class="year-tab" onclick="showYear('2025')">2025</button>
+      <button class="year-tab" onclick="showYear('2024')">2024</button>
+      <button class="year-tab" onclick="showYear('2023')">2023</button>
+    </div>
+
+    <div id="gallery-2026" class="year-gallery">
+      <div class="carousel">
+        <button class="car-btn car-prev" onclick="slideCarousel('2026',-1)">&#8592;</button>
+        <div class="car-track-wrap">
+          <div class="car-track" id="track-2026">
+            <div class="car-slide placeholder-slide"><div class="photo-placeholder"><span>📷</span><p>Upload a 2026 photo</p></div></div>
+            <div class="car-slide placeholder-slide"><div class="photo-placeholder"><span>📷</span><p>Upload a 2026 photo</p></div></div>
+            <div class="car-slide placeholder-slide"><div class="photo-placeholder"><span>📷</span><p>Upload a 2026 photo</p></div></div>
+          </div>
+        </div>
+        <button class="car-btn car-next" onclick="slideCarousel('2026',1)">&#8594;</button>
+      </div>
+      <p class="car-caption">Prom 2026 · Framingham Earl High School</p>
+    </div>
+
+    <div id="gallery-2025" class="year-gallery" style="display:none;">
+      <div class="carousel">
+        <button class="car-btn car-prev" onclick="slideCarousel('2025',-1)">&#8592;</button>
+        <div class="car-track-wrap">
+          <div class="car-track" id="track-2025">
+            <div class="car-slide placeholder-slide"><div class="photo-placeholder"><span>📷</span><p>Upload a 2025 photo</p></div></div>
+            <div class="car-slide placeholder-slide"><div class="photo-placeholder"><span>📷</span><p>Upload a 2025 photo</p></div></div>
+            <div class="car-slide placeholder-slide"><div class="photo-placeholder"><span>📷</span><p>Upload a 2025 photo</p></div></div>
+          </div>
+        </div>
+        <button class="car-btn car-next" onclick="slideCarousel('2025',1)">&#8594;</button>
+      </div>
+      <p class="car-caption">Prom 2025 · Framingham Earl High School</p>
+    </div>
+
+    <div id="gallery-2024" class="year-gallery" style="display:none;">
+      <div class="carousel">
+        <button class="car-btn car-prev" onclick="slideCarousel('2024',-1)">&#8592;</button>
+        <div class="car-track-wrap">
+          <div class="car-track" id="track-2024">
+            <div class="car-slide placeholder-slide"><div class="photo-placeholder"><span>📷</span><p>Upload a 2024 photo</p></div></div>
+            <div class="car-slide placeholder-slide"><div class="photo-placeholder"><span>📷</span><p>Upload a 2024 photo</p></div></div>
+            <div class="car-slide placeholder-slide"><div class="photo-placeholder"><span>📷</span><p>Upload a 2024 photo</p></div></div>
+          </div>
+        </div>
+        <button class="car-btn car-next" onclick="slideCarousel('2024',1)">&#8594;</button>
+      </div>
+      <p class="car-caption">Prom 2024 · Framingham Earl High School</p>
+    </div>
+
+    <div id="gallery-2023" class="year-gallery" style="display:none;">
+      <div class="carousel">
+        <button class="car-btn car-prev" onclick="slideCarousel('2023',-1)">&#8592;</button>
+        <div class="car-track-wrap">
+          <div class="car-track" id="track-2023">
+            <div class="car-slide placeholder-slide"><div class="photo-placeholder"><span>📷</span><p>Upload a 2023 photo</p></div></div>
+            <div class="car-slide placeholder-slide"><div class="photo-placeholder"><span>📷</span><p>Upload a 2023 photo</p></div></div>
+            <div class="car-slide placeholder-slide"><div class="photo-placeholder"><span>📷</span><p>Upload a 2023 photo</p></div></div>
+          </div>
+        </div>
+        <button class="car-btn car-next" onclick="slideCarousel('2023',1)">&#8594;</button>
+      </div>
+      <p class="car-caption">Prom 2023 · Framingham Earl High School</p>
+    </div>
+  </section>
+
+  <!-- TRACKER -->
+  <section id="tracker" style="text-align: center;">
+    <p class="section-label">Our impact</p>
+    <h2 class="section-title">Donations received so far</h2>
+    <div class="divider" style="margin: 1.5rem auto;"></div>
+
+    <div style="display: flex; justify-content: center; gap: 3rem; flex-wrap: wrap; margin: 2.5rem 0;">
+      <div class="tracker-stat">
+        <span class="tracker-num" id="count-dresses">0</span>
+        <span class="tracker-label">Dresses</span>
+      </div>
+      <div class="tracker-stat">
+        <span class="tracker-num" id="count-suits">0</span>
+        <span class="tracker-label">Suits &amp; Blazers</span>
+      </div>
+      <div class="tracker-stat">
+        <span class="tracker-num" id="count-accessories">0</span>
+        <span class="tracker-label">Accessories</span>
+      </div>
+      <div class="tracker-stat">
+        <span class="tracker-num" id="count-total">0</span>
+        <span class="tracker-label">Total items</span>
+      </div>
+    </div>
+
+    <div id="admin-panel" style="display:none; margin-top: 2rem;">
+      <div style="background: var(--white); display: inline-block; padding: 2rem 2.5rem; text-align: left; min-width: 320px;">
+        <p class="section-label" style="margin-bottom: 1rem;">Update counts</p>
+        <div class="admin-row">
+          <label>Dresses</label>
+          <input type="number" id="input-dresses" min="0" value="0" />
+        </div>
+        <div class="admin-row">
+          <label>Suits &amp; Blazers</label>
+          <input type="number" id="input-suits" min="0" value="0" />
+        </div>
+        <div class="admin-row">
+          <label>Accessories</label>
+          <input type="number" id="input-accessories" min="0" value="0" />
+        </div>
+        <button onclick="saveCounts()" class="btn btn-solid" style="margin-top:1.2rem; width:100%; border:none;">Save</button>
+        <button onclick="toggleAdmin()" class="btn" style="margin-top:0.6rem; width:100%;">Close</button>
+      </div>
+    </div>
+
+    <div style="margin-top: 2rem;">
+      <button onclick="toggleAdmin()" style="background:none; border:none; font-size:0.7rem; color:var(--mid); cursor:pointer; letter-spacing:0.1em; text-transform:uppercase;">Update counts</button>
+    </div>
+  </section>
+
+  <!-- FAQs -->
+  <section id="faq">
+    <p class="section-label">FAQs</p>
+    <h2 class="section-title">Your questions answered</h2>
+    <div class="divider"></div>
+
+    <div class="faq-list">
+      <div class="faq-item">
+        <button class="faq-question" onclick="toggleFaq(this)">Who can use the Fram Prom Boutique?<span class="faq-icon">+</span></button>
+        <div class="faq-answer">The boutique is open to all students at Framingham Earl High School. Whether you're looking for a dress, suit, or accessories for prom, any student is welcome to attend.</div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-question" onclick="toggleFaq(this)">Is there a cost to take an item?<span class="faq-icon">+</span></button>
+        <div class="faq-answer">Items are available in exchange for a voluntary monetary donation. There's no set price — give what you can. Every contribution goes back into supporting the boutique and future students. We also support a number of charities as a school who may also benefit.</div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-question" onclick="toggleFaq(this)">What condition should donated items be in?<span class="faq-icon">+</span></button>
+        <div class="faq-answer">We ask that all donated items are clean, in good condition, and ready to wear. Please wash or dry-clean garments before bringing them in. Items with significant damage or staining may not be accepted.</div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-question" onclick="toggleFaq(this)">Where and when can I drop off a donation?<span class="faq-icon">+</span></button>
+        <div class="faq-answer">Donations can be dropped off at school reception, Monday to Friday between 8am and 4pm. No need to arrange anything in advance — just bring your items in. If you'd like to check with us first, use the contact form below.</div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-question" onclick="toggleFaq(this)">Can I donate accessories as well as clothing?<span class="faq-icon">+</span></button>
+        <div class="faq-answer">Absolutely. We welcome dresses, suits, blazers, shirts, ties, shoes, bags, jewellery, cufflinks, corsages, and any other prom-related accessories. The more variety, the better!</div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-question" onclick="toggleFaq(this)">What information is needed when I donate?<span class="faq-icon">+</span></button>
+        <div class="faq-answer">When you drop your donation off, you will be asked to fill in a small card. This will include information about the item: age, size, brand, and any signs of wear or damage. You can leave your name if you would like to, but this is not a requirement.</div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-question" onclick="toggleFaq(this)">When will the boutique be open for students to visit?<span class="faq-icon">+</span></button>
+        <div class="faq-answer">Dates for the boutique opening will be announced closer to prom 2027. Keep an eye on school communications for updates, or get in touch if you have a question.</div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-question" onclick="toggleFaq(this)">Can I try items on?<span class="faq-icon">+</span></button>
+        <div class="faq-answer">Yes! We hope to create a welcoming boutique experience with private changing areas where possible.</div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-question" onclick="toggleFaq(this)">Can I reserve an outfit?<span class="faq-icon">+</span></button>
+        <div class="faq-answer">We are still developing how appointments and reservations will work. More information will be shared before each boutique event.</div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-question" onclick="toggleFaq(this)">Is this only for students who need financial support?<span class="faq-icon">+</span></button>
+        <div class="faq-answer">No. The boutique is open to all eligible students. Choosing pre-loved is an affordable and sustainable option for everyone.</div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-question" onclick="toggleFaq(this)">How does this help the environment?<span class="faq-icon">+</span></button>
+        <div class="faq-answer">Prom outfits are often worn just once before being forgotten in a wardrobe or sent to landfill. By donating and reusing formalwear, we reduce textile waste and give beautiful garments the second life they deserve.</div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-question" onclick="toggleFaq(this)">Does it matter where the item came from?<span class="faq-icon">+</span></button>
+        <div class="faq-answer">Not at all! High street or designer boutique — any donation is gratefully received.</div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-question" onclick="toggleFaq(this)">What happens to unsold items?<span class="faq-icon">+</span></button>
+        <div class="faq-answer">After being available for an agreed period (for example, two prom seasons), any unsold items may be donated to another charity or textile recycling initiative so they continue to benefit others.</div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-question" onclick="toggleFaq(this)">I can't get to school to donate — what can I do?<span class="faq-icon">+</span></button>
+        <div class="faq-answer">Contact Lauren Chapman-Richardson and a collection may be able to be arranged. As we grow, we are looking to expand drop-off locations throughout the local community.</div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-question" onclick="toggleFaq(this)">How can I support the boutique?<span class="faq-icon">+</span></button>
+        <div class="faq-answer">You can support us by donating an outfit, shopping at the boutique, volunteering, or sharing our project with others. If you can't donate formalwear, spreading the word is just as valuable — weddings are another great source of formal wear that rarely gets reused!</div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-question" onclick="toggleFaq(this)">Can local businesses get involved?<span class="faq-icon">+</span></button>
+        <div class="faq-answer">Absolutely! We would love to hear from bridal shops, menswear retailers, dry cleaners, alteration services, and local businesses interested in supporting the boutique through donations or partnerships. Get in touch using the contact form.</div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- CHARITY & LOCAL BUSINESSES -->
+  <section id="charity" style="background: var(--card);">
+    <p class="section-label">Charity &amp; local businesses</p>
+    <h2 class="section-title">Partners &amp; supporters</h2>
+    <div class="divider"></div>
+    <div style="max-width: 680px;">
+      <p class="section-body" style="margin-bottom:2rem;">
+        We are proud to work alongside charities and local businesses who share our values. Whether through donations, partnerships, or sponsorship — together we can make prom accessible and sustainable for everyone in our community.
+      </p>
+      <div style="border: 1.5px dashed rgba(125,143,119,0.35); padding: 3rem 2rem; text-align:center; max-width:560px;">
+        <p style="font-family:'Cormorant Garamond', serif; font-size:1.4rem; font-weight:300; color:var(--accent); margin-bottom:0.6rem;">Coming soon</p>
+        <p style="font-size:0.88rem; color:var(--mid);">Our charity partners and business supporters will be listed here. If you'd like to get involved, please get in touch.</p>
+        <a href="#contact" class="btn" style="margin-top:1.4rem; display:inline-block;">Get in touch</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- MEET THE TEAM -->
+  <section id="team" style="background: var(--white);">
+    <p class="section-label">The people behind it</p>
+    <h2 class="section-title">Meet the team</h2>
+    <div class="divider"></div>
+    <p class="section-body" style="margin-bottom:3rem;">Fram Prom Boutique is brought to life by a dedicated group of staff, students, and community volunteers who believe every student deserves to feel wonderful on prom night.</p>
+
+    <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap:2rem; max-width:900px;">
+
+      <!-- Lead card -->
+      <div style="text-align:center; padding:2rem 1.5rem; background:var(--card);">
+        <div style="width:80px; height:80px; border-radius:50%; background:var(--primary); margin:0 auto 1.2rem; display:flex; align-items:center; justify-content:center;">
+          <span style="font-size:1.8rem;">🌿</span>
+        </div>
+        <p style="font-family:'Cormorant Garamond',serif; font-size:1.2rem; color:var(--text); margin-bottom:0.2rem;">Lauren Chapman-Richardson</p>
+        <p style="font-size:0.75rem; letter-spacing:0.12em; text-transform:uppercase; color:var(--primary);">Project Lead</p>
+        <div style="width:30px; height:1px; background:var(--accent); margin:0.8rem auto;"></div>
+        <p style="font-size:0.85rem; color:var(--mid);">Founder of Fram Prom Boutique and driving force behind the initiative.</p>
+      </div>
+
+      <!-- Placeholder cards -->
+      <div style="text-align:center; padding:2rem 1.5rem; background:var(--card); border:1.5px dashed rgba(125,143,119,0.3);">
+        <div style="width:80px; height:80px; border-radius:50%; background:var(--card); border:1.5px dashed rgba(125,143,119,0.4); margin:0 auto 1.2rem; display:flex; align-items:center; justify-content:center;">
+          <span style="font-size:1.4rem; color:var(--accent);">+</span>
+        </div>
+        <p style="font-size:0.8rem; color:var(--accent); font-style:italic;">Team member coming soon</p>
+      </div>
+
+      <div style="text-align:center; padding:2rem 1.5rem; background:var(--card); border:1.5px dashed rgba(125,143,119,0.3);">
+        <div style="width:80px; height:80px; border-radius:50%; background:var(--card); border:1.5px dashed rgba(125,143,119,0.4); margin:0 auto 1.2rem; display:flex; align-items:center; justify-content:center;">
+          <span style="font-size:1.4rem; color:var(--accent);">+</span>
+        </div>
+        <p style="font-size:0.8rem; color:var(--accent); font-style:italic;">Team member coming soon</p>
+      </div>
+
+      <div style="text-align:center; padding:2rem 1.5rem; background:var(--card); border:1.5px dashed rgba(125,143,119,0.3);">
+        <div style="width:80px; height:80px; border-radius:50%; background:var(--card); border:1.5px dashed rgba(125,143,119,0.4); margin:0 auto 1.2rem; display:flex; align-items:center; justify-content:center;">
+          <span style="font-size:1.4rem; color:var(--accent);">+</span>
+        </div>
+        <p style="font-size:0.8rem; color:var(--accent); font-style:italic;">Team member coming soon</p>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section id="contact">
+    <p class="section-label">Contact</p>
+    <h2 class="section-title">Get in touch</h2>
+    <p class="section-body">Have a question about donating, visiting the boutique, or getting involved? We'd love to hear from you.</p>
+
+    <div class="contact-grid">
+      <div>
+        <form class="contact-form" onsubmit="submitForm(event)">
+          <div class="form-group">
+            <label>Your name</label>
+            <input type="text" placeholder="e.g. Sarah Jones" required />
+          </div>
+          <div class="form-group">
+            <label>Email address</label>
+            <input type="email" placeholder="your@email.com" required />
+          </div>
+          <div class="form-group">
+            <label>I am a…</label>
+            <select>
+              <option value="">Please select</option>
+              <option>Student</option>
+              <option>Parent / Guardian</option>
+              <option>Staff member</option>
+              <option>Community member</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Message</label>
+            <textarea placeholder="Tell us what you'd like to know or donate…" required></textarea>
+          </div>
+          <button type="submit" class="btn btn-solid" style="border:none; width: fit-content;">Send message</button>
+          <div id="form-success">Thank you! We'll be in touch shortly.</div>
+        </form>
+      </div>
+
+      <div class="contact-info-block">
+        <div class="contact-item">
+          <span>Email</span>
+          <a href="mailto:l.chapman-richardson@fehs.set.education">l.chapman-richardson@fehs.set.education</a>
+        </div>
+        <div class="contact-item">
+          <span>Location</span>
+          Framingham Earl High School, Norfolk
+        </div>
+        <div class="contact-item">
+          <span>Drop-off hours</span>
+          Monday – Friday, 8am – 4pm
+        </div>
+        <div class="contact-item">
+          <span>Prom date</span>
+          Summer 2027 — date to be confirmed
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <span class="foot-logo">Fram Prom Boutique</span>
+    <span>A sustainability-led community initiative · Framingham Earl High School</span>
+  </footer>
+
+  <script>
+    /* ── COUNTDOWN ── */
+    const promDate = new Date('2027-07-01T19:00:00');
+    function updateCountdown() {
+      const now = new Date();
+      const diff = promDate - now;
+      if (diff <= 0) {
+        document.getElementById('cd-days').textContent = '0';
+        document.getElementById('cd-hours').textContent = '0';
+        document.getElementById('cd-mins').textContent = '0';
+        document.getElementById('cd-secs').textContent = '0';
+        return;
+      }
+      const days  = Math.floor(diff / 86400000);
+      const hours = Math.floor((diff % 86400000) / 3600000);
+      const mins  = Math.floor((diff % 3600000) / 60000);
+      const secs  = Math.floor((diff % 60000) / 1000);
+      document.getElementById('cd-days').textContent  = days;
+      document.getElementById('cd-hours').textContent = String(hours).padStart(2,'0');
+      document.getElementById('cd-mins').textContent  = String(mins).padStart(2,'0');
+      document.getElementById('cd-secs').textContent  = String(secs).padStart(2,'0');
+    }
+    updateCountdown();
+    setInterval(updateCountdown, 1000);
+
+    /* ── TRACKER ── */
+    const KEYS = { dresses: 'fpb-dresses', suits: 'fpb-suits', accessories: 'fpb-accessories' };
+    function getCounts() {
+      return {
+        dresses:     parseInt(localStorage.getItem(KEYS.dresses) || '0'),
+        suits:       parseInt(localStorage.getItem(KEYS.suits) || '0'),
+        accessories: parseInt(localStorage.getItem(KEYS.accessories) || '0'),
+      };
+    }
+    function displayCounts() {
+      const c = getCounts();
+      document.getElementById('count-dresses').textContent     = c.dresses;
+      document.getElementById('count-suits').textContent       = c.suits;
+      document.getElementById('count-accessories').textContent = c.accessories;
+      document.getElementById('count-total').textContent       = c.dresses + c.suits + c.accessories;
+    }
+    function toggleAdmin() {
+      const panel = document.getElementById('admin-panel');
+      const visible = panel.style.display !== 'none';
+      if (!visible) {
+        const c = getCounts();
+        document.getElementById('input-dresses').value     = c.dresses;
+        document.getElementById('input-suits').value       = c.suits;
+        document.getElementById('input-accessories').value = c.accessories;
+      }
+      panel.style.display = visible ? 'none' : 'block';
+    }
+    function saveCounts() {
+      localStorage.setItem(KEYS.dresses,     Math.max(0, parseInt(document.getElementById('input-dresses').value) || 0));
+      localStorage.setItem(KEYS.suits,       Math.max(0, parseInt(document.getElementById('input-suits').value) || 0));
+      localStorage.setItem(KEYS.accessories, Math.max(0, parseInt(document.getElementById('input-accessories').value) || 0));
+      displayCounts();
+
+    /* ── GALLERY ── */
+    const carPositions = { '2026': 0, '2025': 0, '2024': 0, '2023': 0 };
+
+    function showYear(year) {
+      document.querySelectorAll('.year-gallery').forEach(g => g.style.display = 'none');
+      document.getElementById('gallery-' + year).style.display = 'block';
+      document.querySelectorAll('.year-tab').forEach(t => t.classList.remove('active'));
+      event.target.classList.add('active');
+    }
+
+    function slideCarousel(year, dir) {
+      const track = document.getElementById('track-' + year);
+      const slides = track.querySelectorAll('.car-slide');
+      const total = slides.length;
+      carPositions[year] = (carPositions[year] + dir + total) % total;
+      track.style.transform = 'translateX(-' + (carPositions[year] * 100) + '%)';
+    }
+
+      document.getElementById('admin-panel').style.display = 'none';
+    }
+    displayCounts();
+
+    /* ── GALLERY ── */
+    const carPositions = { '2026': 0, '2025': 0, '2024': 0, '2023': 0 };
+
+    function showYear(year) {
+      document.querySelectorAll('.year-gallery').forEach(g => g.style.display = 'none');
+      document.getElementById('gallery-' + year).style.display = 'block';
+      document.querySelectorAll('.year-tab').forEach(t => t.classList.remove('active'));
+      event.target.classList.add('active');
+    }
+
+    function slideCarousel(year, dir) {
+      const track = document.getElementById('track-' + year);
+      const slides = track.querySelectorAll('.car-slide');
+      const total = slides.length;
+      carPositions[year] = (carPositions[year] + dir + total) % total;
+      track.style.transform = 'translateX(-' + (carPositions[year] * 100) + '%)';
+    }
+
+
+    /* ── FAQs ── */
+    function toggleFaq(btn) {
+      const item = btn.closest('.faq-item');
+      const wasOpen = item.classList.contains('open');
+      document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('open'));
+      if (!wasOpen) item.classList.add('open');
+    }
+
+    /* ── CONTACT FORM ── */
+    function submitForm(e) {
+      e.preventDefault();
+      document.getElementById('form-success').style.display = 'block';
+      e.target.reset();
+      setTimeout(() => { document.getElementById('form-success').style.display = 'none'; }, 5000);
+    }
+  </script>
+
+</body>
+</html>
